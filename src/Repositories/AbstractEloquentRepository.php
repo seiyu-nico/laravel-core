@@ -47,6 +47,7 @@ abstract class AbstractEloquentRepository implements InterfaceRepository
      * @param array<int|string, string|Closure> $relations
      * @param array<string, string> $orders
      * @param ?int $limit
+     * @param  ?Closure  $callback
      * @return Collection<int, TModel>
      */
     public function findWithConditions(
@@ -54,7 +55,8 @@ abstract class AbstractEloquentRepository implements InterfaceRepository
         array $conditions = [],
         array $relations = [],
         array $orders = [],
-        ?int $limit = null
+        ?int $limit = null,
+        ?Closure $callback = null
     ): Collection {
         $model = $this->model->with($relations)->where($conditions);
         foreach ($orders as $key => $direction) {
@@ -65,7 +67,7 @@ abstract class AbstractEloquentRepository implements InterfaceRepository
             $model->limit($limit);
         }
 
-        return $model->get($columns);
+        return $model->select($columns)->getOr(fn () => is_null($callback) ? [] : call_user_func($callback));
     }
 
     /**
@@ -107,16 +109,20 @@ abstract class AbstractEloquentRepository implements InterfaceRepository
      * @param non-empty-array<int, string> $columns
      * @param array<int|string, mixed> $conditions
      * @param array<int|string, string|Closure> $relations
+     * @param  ?Closure  $callback
      * @return TModel|null
      */
     public function findOneWithConditions(
         array $columns = ['*'],
         array $conditions = [],
-        array $relations = []
+        array $relations = [],
+        ?Closure $callback = null
     ): ?Model {
-        $model = $this->model->with($relations)->where($conditions);
-
-        return $model->first($columns);
+        return $this->model
+            ->with($relations)
+            ->where($conditions)
+            ->select($columns)
+            ->firstOr(fn () => is_null($callback) ? null : call_user_func($callback));
     }
 
     /**
@@ -124,13 +130,10 @@ abstract class AbstractEloquentRepository implements InterfaceRepository
      *
      * @param array<string, mixed> $payload
      * @return TModel
-     * @throws InvalidParameterException
      */
     public function create(array $payload): Model
     {
-        $model = $this->model->create($payload);
-
-        return $model->fresh();
+        return $this->model->create($payload)->fresh();
     }
 
     /**

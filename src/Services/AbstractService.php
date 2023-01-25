@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 /**
  * @template TModel of Model
@@ -116,32 +115,5 @@ abstract class AbstractService implements InterfaceService
         if (array_key_exists($key, $attributes)) {
             $belongsToMany->sync($attributes[$key]);
         }
-    }
-
-    /**
-     * @param non-empty-array<int, string> $columns
-     * @param array<int|string, mixed>|Closure $conditions
-     * @param array<int|string, string|Closure> $relations
-     * @param array<string, string> $orders
-     * @param int $per_page
-     * @param int $page
-     * @return LengthAwarePaginator<TModel>
-     */
-    public function findWithConditionsAndPagination(
-        array $columns = ['*'],
-        array|Closure $conditions = [],
-        array $relations = [],
-        array $orders = [],
-        int $per_page = 10,
-        int $page = 1,
-    ): LengthAwarePaginator {
-        return $this->repository->findWithConditionsAndPagination(
-            columns: $columns,
-            conditions: $conditions,
-            relations: $relations,
-            orders: $orders,
-            per_page: $per_page,
-            page: $page,
-        );
     }
 }

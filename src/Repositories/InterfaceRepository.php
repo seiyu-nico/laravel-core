@@ -31,6 +31,7 @@ interface InterfaceRepository
      * @param array<int|string, string|Closure> $relations
      * @param array<string, string> $orders
      * @param ?int $limit
+     * @param  ?Closure  $callback
      * @return Collection<int, TModel>
      */
     public function findWithConditions(
@@ -38,7 +39,8 @@ interface InterfaceRepository
         array $conditions = [],
         array $relations = [],
         array $orders = [],
-        ?int $limit = null
+        ?int $limit = null,
+        ?Closure $callback = null
     ): Collection;
 
     /**
@@ -67,9 +69,10 @@ interface InterfaceRepository
      * @param non-empty-array<int, string> $columns
      * @param array<int|string, mixed> $conditions
      * @param array<int|string, string|Closure> $relations
+     * @param  ?Closure  $callback
      * @return TModel|null
      */
-    public function findOneWithConditions(array $columns = ['*'], array $conditions = [], array $relations = []): ?Model;
+    public function findOneWithConditions(array $columns = ['*'], array $conditions = [], array $relations = [], ?Closure $callback = null): ?Model;
 
     /**
      * IDを使用して、１行のデータを取得する
