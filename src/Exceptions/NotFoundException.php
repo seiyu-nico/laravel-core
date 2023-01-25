@@ -2,7 +2,6 @@
 
 namespace SeiyuNico\LaravelCore\Exceptions;
 
-use SeiyuNico\LaravelCore\Exceptions\LaravelCoreException;
 use Throwable;
 
 class NotFoundException extends LaravelCoreException

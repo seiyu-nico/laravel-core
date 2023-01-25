@@ -2,12 +2,12 @@
 
 namespace SeiyuNico\LaravelCore\Services;
 
-use SeiyuNico\LaravelCore\Exceptions\InvalidParameterException;
-use SeiyuNico\LaravelCore\Exceptions\NotFoundException;
 use Closure;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use SeiyuNico\LaravelCore\Exceptions\InvalidParameterException;
+use SeiyuNico\LaravelCore\Exceptions\NotFoundException;
 
 /**
  * @template TModel as Model
@@ -15,8 +15,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 interface InterfaceService
 {
     /**
-     * @param non-empty-array<int, string> $columns
-     * @param array<int|string, string|Closure> $relations
+     * @param  non-empty-array<int, string>  $columns
+     * @param  array<int|string, string|Closure>  $relations
      * @return Collection<int, TModel>
      */
     public function all(
@@ -25,23 +25,26 @@ interface InterfaceService
     ): Collection;
 
     /**
-     * @param int $id
+     * @param  int  $id
      * @return TModel
+     *
      * @throws NotFoundException
      */
     public function findById(int $id): Model;
 
     /**
-     * @param array<string, mixed> $attributes
+     * @param  array<string, mixed>  $attributes
      * @return TModel
+     *
      * @throws InvalidParameterException
      */
     public function create(array $attributes): Model;
 
     /**
-     * @param int $id
-     * @param array<string, mixed> $attributes
+     * @param  int  $id
+     * @param  array<string, mixed>  $attributes
      * @return TModel
+     *
      * @throws InvalidParameterException
      */
     public function update(
@@ -50,16 +53,17 @@ interface InterfaceService
     ): Model;
 
     /**
-     * @param int $id
+     * @param  int  $id
      * @return bool
+     *
      * @throws InvalidParameterException
      */
     public function delete(int $id): bool;
 
     /**
-     * @param BelongsToMany<TModel> $belongsToMany
-     * @param array<string|mixed> $attributes
-     * @param string $key
+     * @param  BelongsToMany<TModel>  $belongsToMany
+     * @param  array<string|mixed>  $attributes
+     * @param  string  $key
      * @return void
      */
     public static function attachIfKeyExist(
@@ -69,9 +73,9 @@ interface InterfaceService
     ): void;
 
     /**
-     * @param BelongsToMany<TModel> $belongsToMany
-     * @param array<string|mixed> $attributes
-     * @param string $key
+     * @param  BelongsToMany<TModel>  $belongsToMany
+     * @param  array<string|mixed>  $attributes
+     * @param  string  $key
      * @return void
      */
     public static function syncIfKeyExist(

@@ -2,24 +2,26 @@
 
 namespace SeiyuNico\LaravelCore\Services;
 
-use SeiyuNico\LaravelCore\Exceptions\InvalidParameterException;
-use SeiyuNico\LaravelCore\Exceptions\NotFoundException;
-use SeiyuNico\LaravelCore\Repositories\InterfaceRepository;
 use Closure;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use SeiyuNico\LaravelCore\Exceptions\InvalidParameterException;
+use SeiyuNico\LaravelCore\Exceptions\NotFoundException;
+use SeiyuNico\LaravelCore\Repositories\InterfaceRepository;
 
 /**
  * @template TModel of Model
  * @template TRepository of InterfaceRepository<TModel>
+ *
  * @implements InterfaceService<TModel>
  */
 abstract class AbstractService implements InterfaceService
 {
     /**
-     * @param InterfaceRepository<TModel> $repository
+     * @param  InterfaceRepository<TModel>  $repository
+     *
      * @phpstan-param TRepository $repository
      */
     public function __construct(protected readonly InterfaceRepository $repository)
@@ -27,8 +29,8 @@ abstract class AbstractService implements InterfaceService
     }
 
     /**
-     * @param non-empty-array<int, string> $columns
-     * @param array<int|string, string|Closure> $relations
+     * @param  non-empty-array<int, string>  $columns
+     * @param  array<int|string, string|Closure>  $relations
      * @return Collection<int, TModel>
      */
     public function all(
@@ -39,8 +41,9 @@ abstract class AbstractService implements InterfaceService
     }
 
     /**
-     * @param int $id
+     * @param  int  $id
      * @return TModel
+     *
      * @throws NotFoundException
      */
     public function findById(int $id): Model
@@ -53,8 +56,9 @@ abstract class AbstractService implements InterfaceService
     }
 
     /**
-     * @param array<string, mixed> $attributes
+     * @param  array<string, mixed>  $attributes
      * @return TModel
+     *
      * @throws InvalidParameterException
      */
     public function create(array $attributes): Model
@@ -63,9 +67,10 @@ abstract class AbstractService implements InterfaceService
     }
 
     /**
-     * @param int $id
-     * @param array<string, mixed> $attributes
+     * @param  int  $id
+     * @param  array<string, mixed>  $attributes
      * @return TModel
+     *
      * @throws InvalidParameterException
      */
     public function update(
@@ -76,8 +81,9 @@ abstract class AbstractService implements InterfaceService
     }
 
     /**
-     * @param int $id
+     * @param  int  $id
      * @return bool
+     *
      * @throws InvalidParameterException
      */
     public function delete(int $id): bool
@@ -86,9 +92,9 @@ abstract class AbstractService implements InterfaceService
     }
 
     /**
-     * @param BelongsToMany<TModel> $belongsToMany
-     * @param array<string|mixed> $attributes
-     * @param string $key
+     * @param  BelongsToMany<TModel>  $belongsToMany
+     * @param  array<string|mixed>  $attributes
+     * @param  string  $key
      * @return void
      */
     public static function attachIfKeyExist(
@@ -102,9 +108,9 @@ abstract class AbstractService implements InterfaceService
     }
 
     /**
-     * @param BelongsToMany<TModel> $belongsToMany
-     * @param array<string|mixed> $attributes
-     * @param string $key
+     * @param  BelongsToMany<TModel>  $belongsToMany
+     * @param  array<string|mixed>  $attributes
+     * @param  string  $key
      * @return void
      */
     public static function syncIfKeyExist(

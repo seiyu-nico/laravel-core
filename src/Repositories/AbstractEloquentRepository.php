@@ -2,15 +2,16 @@
 
 namespace SeiyuNico\LaravelCore\Repositories;
 
-use SeiyuNico\LaravelCore\Exceptions\InvalidParameterException;
 use Closure;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use SeiyuNico\LaravelCore\Exceptions\InvalidParameterException;
 
 /**
  * @template TModel of Model
+ *
  * @implements InterfaceRepository<TModel>
  */
 abstract class AbstractEloquentRepository implements InterfaceRepository
@@ -28,8 +29,8 @@ abstract class AbstractEloquentRepository implements InterfaceRepository
     /**
      * 全部のデータを取得する.
      *
-     * @param non-empty-array<int, string> $columns
-     * @param array<int|string, string|Closure> $relations
+     * @param  non-empty-array<int, string>  $columns
+     * @param  array<int|string, string|Closure>  $relations
      * @return Collection<int, TModel>
      */
     public function all(
@@ -42,11 +43,11 @@ abstract class AbstractEloquentRepository implements InterfaceRepository
     /**
      * 指定した条件に合ってるデータを取得する
      *
-     * @param non-empty-array<int, string> $columns
-     * @param array<int|string, mixed> $conditions
-     * @param array<int|string, string|Closure> $relations
-     * @param array<string, string> $orders
-     * @param ?int $limit
+     * @param  non-empty-array<int, string>  $columns
+     * @param  array<int|string, mixed>  $conditions
+     * @param  array<int|string, string|Closure>  $relations
+     * @param  array<string, string>  $orders
+     * @param  ?int  $limit
      * @param  ?Closure  $callback
      * @return Collection<int, TModel>
      */
@@ -73,12 +74,12 @@ abstract class AbstractEloquentRepository implements InterfaceRepository
     /**
      * 指定した条件に合ってるデータを取得する(ページネーション)
      *
-     * @param non-empty-array<int, string> $columns
-     * @param array<int|string, mixed>|Closure $conditions
-     * @param array<int|string, string|Closure> $relations
-     * @param array<string, string> $orders
-     * @param int $per_page
-     * @param int $page
+     * @param  non-empty-array<int, string>  $columns
+     * @param  array<int|string, mixed>|Closure  $conditions
+     * @param  array<int|string, string|Closure>  $relations
+     * @param  array<string, string>  $orders
+     * @param  int  $per_page
+     * @param  int  $page
      * @return LengthAwarePaginator<TModel>
      */
     public function findWithConditionsAndPagination(
@@ -106,9 +107,9 @@ abstract class AbstractEloquentRepository implements InterfaceRepository
     /**
      * 指定した条件に合ってるデータを取得する
      *
-     * @param non-empty-array<int, string> $columns
-     * @param array<int|string, mixed> $conditions
-     * @param array<int|string, string|Closure> $relations
+     * @param  non-empty-array<int, string>  $columns
+     * @param  array<int|string, mixed>  $conditions
+     * @param  array<int|string, string|Closure>  $relations
      * @param  ?Closure  $callback
      * @return TModel|null
      */
@@ -128,7 +129,7 @@ abstract class AbstractEloquentRepository implements InterfaceRepository
     /**
      * モデルを作成する
      *
-     * @param array<string, mixed> $payload
+     * @param  array<string, mixed>  $payload
      * @return TModel
      */
     public function create(array $payload): Model
@@ -139,9 +140,10 @@ abstract class AbstractEloquentRepository implements InterfaceRepository
     /**
      * データをアップデートする
      *
-     * @param int|string $id
-     * @param array<string, mixed> $payload
+     * @param  int|string  $id
+     * @param  array<string, mixed>  $payload
      * @return TModel
+     *
      * @throws InvalidParameterException
      */
     public function update(
@@ -156,7 +158,7 @@ abstract class AbstractEloquentRepository implements InterfaceRepository
 
         $result = $model->update($payload);
 
-        if (!$result) {
+        if (! $result) {
             throw new InvalidParameterException('不正なパラメータ');
         }
 
@@ -166,8 +168,8 @@ abstract class AbstractEloquentRepository implements InterfaceRepository
     /**
      * データを挿入または更新する
      *
-     * @param array<string, mixed> $attributes
-     * @param array<string, mixed> $values
+     * @param  array<string, mixed>  $attributes
+     * @param  array<string, mixed>  $values
      * @return TModel
      */
     public function updateOrCreate(
@@ -180,14 +182,15 @@ abstract class AbstractEloquentRepository implements InterfaceRepository
     /**
      * IDを使用して、データを削除する
      *
-     * @param int|string $id
+     * @param  int|string  $id
      * @return true
+     *
      * @throws InvalidParameterException
      */
     public function deleteById(
         int|string $id
     ): bool {
-        if (!$this->findById($id)->delete()) {
+        if (! $this->findById($id)->delete()) {
             throw new InvalidParameterException('不正なID');
         }
 
@@ -197,11 +200,12 @@ abstract class AbstractEloquentRepository implements InterfaceRepository
     /**
      * IDを使用して、１行のデータを取得する
      *
-     * @param int|string $id
-     * @param non-empty-array<int, string> $columns
-     * @param array<int|string, string|Closure> $relations
-     * @param array<int, string> $appends
+     * @param  int|string  $id
+     * @param  non-empty-array<int, string>  $columns
+     * @param  array<int|string, string|Closure>  $relations
+     * @param  array<int, string>  $appends
      * @return TModel
+     *
      * @throws ModelNotFoundException
      */
     public function findById(
