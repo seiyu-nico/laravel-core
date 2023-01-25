@@ -22,5 +22,15 @@
                 "SeiyuNico\\LaravelCore\\Providers\\LaravelCoreProviders"
             ]
         }
+    },
+    "require-dev": {
+        "laravel/pint": "^1.4",
+        "phpstan/phpstan": "^1.9"
+    },
+    "scripts": {
+        "pint": "./vendor/bin/pint -v",
+        "check-pint": "./vendor/bin/pint --test",
+        "phpstan": "./vendor/bin/phpstan analyse --xdebug"
+
     }
 }
