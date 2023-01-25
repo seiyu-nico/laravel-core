@@ -1,0 +1,19 @@
+{
+    "name": "seiyu-nico/laravel-core",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "SeiyuNico\\\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "seiyu-nico"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "laravel/framework": "8.*"
+    }
+}
