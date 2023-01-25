@@ -4,8 +4,4 @@
 composer config repositories.seiyu-nico/laravel-core vcs https://github.com/seiyu-nico/laravel-core
 composer require seiyu-nico/laravel-core
 ```
-## config/app.phpへProviderクラスを追加
-```
-SeiyuNico\LaravelCore\Providers\LaravelCoreProviders::class
-```
-
+[リリースノート](https://github.com/seiyu-nico/laravel-core/releases)
