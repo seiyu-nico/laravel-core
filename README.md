@@ -6,7 +6,6 @@ composer require seiyu-nico/laravel-core
 ```
 [リリースノート](https://github.com/seiyu-nico/laravel-core/releases)
 
-
 ## 各種クラス作成
 ### Serviceクラス作成
 ```
@@ -39,7 +38,6 @@ php artisan make:service UserService
 ```
 php artisan make:service -mr UserService
 ```
-
 
 ### Repositoryクラス作成
 ```
