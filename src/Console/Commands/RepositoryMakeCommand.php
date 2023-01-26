@@ -148,7 +148,7 @@ class RepositoryMakeCommand extends GeneratorCommand
     {
         return [
             ['model', 'm', InputOption::VALUE_NONE, 'Generate a repository for the given model'],
-            ['service', 's', InputOption::VALUE_NONE, 'Generate a repository for the given repository'],
+            ['service', 's', InputOption::VALUE_NONE, 'Generate a repository for the given service'],
         ];
     }
 }
