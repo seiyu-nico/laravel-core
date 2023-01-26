@@ -20,7 +20,8 @@ abstract class AbstractEloquentRepository implements InterfaceRepository
      * BaseRepository constructor.
      *
      * @phpstan-param TModel $model
-     * @param Model $model
+     *
+     * @param  Model  $model
      */
     public function __construct(protected readonly Model $model)
     {
