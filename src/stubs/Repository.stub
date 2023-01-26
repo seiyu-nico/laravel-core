@@ -1,0 +1,18 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ namespacedModel }};
+use SeiyuNico\LaravelCore\Repositories\AbstractEloquentRepository;
+
+/**
+ * @extends AbstractEloquentRepository<{{ modelClass }}>
+ */
+class {{ class }} extends AbstractEloquentRepository
+{
+    public function __construct({{ modelClass }} $model)
+    {
+        parent::__construct($model);
+    }
+
+}

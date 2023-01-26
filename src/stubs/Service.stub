@@ -1,0 +1,18 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ namespacedModel }};
+use {{ namespacedRepository }};
+use SeiyuNico\LaravelCore\Services\AbstractService;
+
+/**
+ * @extends AbstractService<{{ modelClass }}, {{ repositoryClass }}>
+ */
+class {{ class }} extends AbstractService
+{
+    public function __construct({{ repositoryClass }} $repository)
+    {
+        parent::__construct($repository);
+    }
+}
