@@ -71,34 +71,6 @@ php artisan make:repository UserRepository
 php artisan make:repository -ms UserRepository
 ```
 
-
-## モデルの画像自動登録について
-- モデルに`imageColumns`で画像カラムを指定
-```php
-protected array $imageColumns = [
-    'images',
-];
-```
-- 画像のパスを返すメソッドを追加
-```php
-public function buildImagePath(string $column): string
-{
-    return "files/{table_name}/{$this->id}";
-}
-```
-複数画像カラムがある場合
-```php
-public function buildImagePath(string $column): string
-{
-    return match ($column) {
-        'images1' => "files/{table_name}/images1/",
-        'images2' => "files/{table_name}/images2/",
-        default => throw new Exception('hoge hoge'),
-    };
-}
-```
-
-
 ## 開発
 ### cs-fixer
 - laravelありきなのでlaravel/pintを使用
@@ -110,5 +82,3 @@ composer pint
 ```
 composer phpstan
 ```
-
-
