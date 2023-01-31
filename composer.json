@@ -5,7 +5,10 @@
     "autoload": {
         "psr-4": {
             "SeiyuNico\\LaravelCore\\": "src/"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "authors": [
         {
